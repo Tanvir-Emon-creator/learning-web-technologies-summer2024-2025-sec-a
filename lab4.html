@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date of Birth</title>
+</head>
+<body>
+  
+  <fieldset style="border: 2px solid black; width: 300px;">
+    <legend style="font-weight: bold; text-align: center;">Date of Birth</legend>
+
+    <div>
+      dd &nbsp;&nbsp; mm &nbsp;&nbsp; yyyy
+    </div>
+
+    <div>
+      <input id="day" size="2" placeholder="dd"> /
+      <input id="month" size="2" placeholder="mm"> /
+      <input id="year" size="4" placeholder="yyyy">
+    </div>
+
+    <br>
+
+    <button onclick="checkDate()">Submit</button>
+
+    <p id="message"></p>
+
+  </fieldset>
+
+  <script>
+    
+    function checkDate() {
+      var day = document.getElementById('day').value;
+      var month = document.getElementById('month').value;
+      var year = document.getElementById('year').value;
+      var message = document.getElementById('message');
+
+      day = day.trim();
+      month = month.trim();
+      year = year.trim();
+
+      if(day === "" || month === "" || year === "") {
+        message.style.color = "red";
+        message.innerText = "Please fill all fields.";
+        return;
+      }
+
+      day = Number(day);
+      month = Number(month);
+      year = Number(year);
+
+      if(isNaN(day) || day < 0 || day > 31) {
+        message.style.color = "red";
+        message.innerText = "Day must be from 0 to 31.";
+        return;
+      }
+
+      if(isNaN(month) || month < 1 || month > 12) {
+        message.style.color = "red";
+        message.innerText = "Month must be from 1 to 12.";
+        return;
+      }
+
+      if(isNaN(year) || year < 1900 || year > 2016) {
+        message.style.color = "red";
+        message.innerText = "Year must be from 1900 to 2016.";
+        return;
+      }
+
+      message.style.color = "green";
+      message.innerText = "Date is valid!";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Picture</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 400px;
+    }
+    hr {
+      margin: 15px 0;
+    }
+    #fileName {
+      margin-left: 10px;
+      font-style: italic;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- User Id Label and Input -->
+  <label>User Id</label><br>
+  <input id="userId" type="text"><br><br>
+
+  <!-- Picture Label, Browse Button and File Name Display -->
+  <label>Picture</label>
+  <!-- Hidden file input -->
+  <input id="picture" type="file" style="display:none" onchange="showFileName()">
+  <!-- Button to open file chooser -->
+  <button onclick="openFileChooser()">Browse</button>
+  <!-- Text to show selected file name -->
+  <span id="fileName">No file Selected</span><br><br>
+
+  <!-- Horizontal line -->
+  <hr>
+
+  <!-- Submit Button -->
+  <button onclick="checkForm()">Submit</button>
+
+  <script>
+    // Function to open the hidden file input when "Browse" clicked
+    function openFileChooser() {
+      document.getElementById('picture').click();
+    }
+
+    // Function to show selected file name or default text
+    function showFileName() {
+      var fileInput = document.getElementById('picture');
+      var fileName = document.getElementById('fileName');
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+      } else {
+        fileName.textContent = 'No file Selected';
+      }
+    }
+
+    // Function to check validations when Submit clicked
+    function checkForm() {
+      var userId = document.getElementById('userId').value.trim();
+      var picture = document.getElementById('picture').files;
+
+      // Check if User Id is empty
+      if (userId === '') {
+        alert('User Id cannot be empty.');
+        return;
+      }
+
+      // Check if User Id is a positive number
+      if (!/^\d+$/.test(userId) || Number(userId) <= 0) {
+        alert('User Id must be a positive number.');
+        return;
+      }
+
+      // Check if picture file is selected
+      if (picture.length === 0) {
+        alert('Please select a picture.');
+        return;
+      }
+
+      alert('Form is valid. You can submit now.');
+      // Here you can add your form submit code
+    }
+  </script>
+
+</body>
+</html>

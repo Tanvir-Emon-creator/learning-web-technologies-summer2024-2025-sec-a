@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Validation</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    .tooltip {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -90px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #success-message {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+      display: none; 
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Email Form</h2>
+  <form id="emailForm">
+    <label for="email">Email</label>
+    <span class="tooltip">
+      <span style="border: 1px solid black; padding: 0 5px; border-radius: 3px;">i</span>
+      <span class="tooltiptext">hint: sample@example.com</span>
+    </span><br>
+
+    <input type="text" id="email" name="email"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="success-message">Form submitted successfully!</div>
+
+  <script>
+
+    document.getElementById("emailForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const emailInput = document.getElementById("email");
+      const email = emailInput.value.trim(); 
+      const successMessage = document.getElementById("success-message"); 
+
+      if (email === "") {
+        alert("Email cannot be empty."); 
+        return; 
+      }
+
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address (like sample@example.com).");
+        return; 
+      }
+
+      successMessage.style.display = "block";
+      emailInput.value = ""; 
+    });
+  </script>
+
+</body>
+</html>
